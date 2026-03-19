@@ -1,0 +1,27 @@
+import java.util.Scanner;
+public class computeFibonacci {
+    // Main method
+    public static void main(String[] args) {
+       // Create Scanner
+       Scanner input = new Scanner(System.in);
+       System.out.print(" Enter an index for a Fibonacci Number: ");
+       int index = input.nextInt();
+       
+       //Find and display the Fibonacci Number
+       System.out.println(" The Fibonacci number at index " + index + " is " + fib(index));
+       
+         input.close();
+    }
+        public static long fib(int index) {
+            return fib(index, 1); // Call auxiliary method
+        }
+    // The method for finding the Fibonacci Number
+    public static long fib(int index, int result) {
+        if (index == 0 ) {return result;}
+            else if ( index == 1) { return 1;} // Base Case
+            // Reduction and recursive call
+            else {return fib(index - 1) + fib(index - 2) * result;}
+        }
+    }
+
+
