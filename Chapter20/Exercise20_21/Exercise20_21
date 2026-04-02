@@ -1,0 +1,55 @@
+/*
+Author: Chase Rennert
+Date:04/01/2026
+
+Description: list comparison using selection sort
+*/
+import java.util.Comparator;
+
+public class Exercise20_21 extends GeometricObjectComparator{
+  public static void main(String[] args) {
+    GeometricObject[] list = {new Circle(5), new Rectangle(4, 5),
+        new Circle(5.5), new Rectangle(2.4, 5), new Circle(0.5), 
+        new Rectangle(4, 65), new Circle(4.5), new Rectangle(4.4, 1),
+        new Circle(6.5), new Rectangle(4, 5)};
+
+    Circle[] list1 = {new Circle(2), new Circle(3), new Circle(2),
+      new Circle(5), new Circle(6), new Circle(1), new Circle(2),
+      new Circle(3), new Circle(14), new Circle(12)};
+
+      for (GeometricObject g : list) {
+        System.out.println("Sorted list area of rectangle: " + g.getArea());
+      }
+      for (Circle c : list1) {
+        System.out.println("Sorted list1 for radius: " + c.getArea());
+      }
+
+  }
+    public static <E extends GeometricObject> void selectionSort(E[] list,E[] list1, Comparator<? super E> comparator) {
+      selectionSort(list1,list, comparator);
+      for (int i = 0; i < list1.length; i++) {
+        System.out.println( "Sorted list: "+list[i].getArea());
+      }
+
+      for (int i = 0; i < list.length - 1; i++) {
+        int currentMinIndex = i;
+        for ( int j = i + 1; j < list.length; j++) {
+          if (comparator.compare(list[j], list[currentMinIndex]) < 0) {
+            currentMinIndex = j;}
+            if ( currentMinIndex !=i) {
+              E temp = list[i];
+              list[i] = list[currentMinIndex];
+              list[currentMinIndex] = temp;
+                  }
+
+                }
+
+            }
+
+        }
+        // System.out.println("");
+        // for (int i = 0; i < list.length; i++)
+        //   System.out.println(list[i].getArea() + " ");
+
+       
+}
