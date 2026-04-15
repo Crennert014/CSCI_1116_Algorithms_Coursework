@@ -1,0 +1,11 @@
+package practice24;
+
+public class Comparable {
+   
+
+public interface ComparableInterface<E> {
+    public int  compareTo(E e);
+
+    }
+}
+// needed for other files in Chapter 24
