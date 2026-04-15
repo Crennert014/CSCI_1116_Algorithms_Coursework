@@ -1,0 +1,21 @@
+package Exercise24_05;
+
+public class GenericQueueInheritance {
+    public static void main(String [] args) {
+        GenericQueue<String> queue = new GenericQueue<>();
+
+        queue.enqueue("Jongeun");
+        System.out.println("(1) " + queue);
+
+        queue.enqueue("Paul");
+        System.out.println("(2) " + queue);
+
+        queue.enqueue("Omega");
+        queue.enqueue("Alpha");
+        System.out.println("(3) " + queue);
+
+        System.out.println("(4) " + queue.dequeue());
+        System.out.println("(5) " + queue.dequeue());
+        System.out.println("(6) " + queue);
+    }
+}
