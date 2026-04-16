@@ -1,0 +1,31 @@
+
+import java.util.*;
+
+public class TestTreeSet {
+    public static void main(String[] args) {
+        Set<String> set = new TreeSet<>();
+
+        set.add("London");
+        set.add("Paris");
+        set.add("New York");
+        set.add("San Francisco");
+        set.add("Beijing");
+        set.add("New York");
+
+        TreeSet<String> treeSet = new TreeSet<>(set);
+        System.out.println("Sorted tree set is " + treeSet);
+
+        System.out.println("first(): " + treeSet.first());
+        System.out.println("last(): " + treeSet.last());
+        System.out.println("headSet(\"New York\"): " + treeSet.headSet("New York"));
+        System.out.println("tailSet(\"New York\"): " + treeSet.tailSet("New York"));
+
+        System.out.println("higher(\"P\"): " + treeSet.higher("New York"));
+        System.out.println("lower(\"P\"): " + treeSet.lower("New York"));
+        System.out.println("ceiling(\"p\"): " + treeSet.ceiling("New York"));
+        System.out.println("floor(\"p\"): " + treeSet.floor("New York"));
+        System.out.println("pollFirst(): " + treeSet.pollFirst());
+        System.out.println("pollLast(): " + treeSet.pollLast());
+        System.out.println("New tree set: " + treeSet);
+    }    
+}
