@@ -1,5 +1,4 @@
 
-import java.util.*
 
 public class WordOccurrence implements Comparable<WordOccurrence> {
     private String word;
@@ -11,31 +10,27 @@ public class WordOccurrence implements Comparable<WordOccurrence> {
         
     }
 
-    List<WordOccurrence> wordOccurrences = new ArrayList<>()
+    public String getWord() {
+        return word;
+    }
 
-    Collections.sort(WordOccurrence());
-
-//     public String getWord() {
-//         return word;
-//     }
-
-//     public int getCount() {
-//         return count;
-//     }
+    public int getCount() {
+        return count;
+    }
 
     
-//     public int compareTo(WordOccurrence other) {
-//         return Integer.compare(this.count, other.count);
-//     }
+    public int compareTo(WordOccurrence other) {
+        return Integer.compare(this.count, other.count);
+    }
 
-//     @Override
-//     public String toString() {
-//         return word + "\t" + count;
-//     }
-// public static void sortWordOccurrences(List<WordOccurrence> wordOccurrences) {
-//     Collections.sort(wordOccurrences);
+    @Override
+    public String toString() {
+        return word + "\t" + count;
+    }
+public static void sortWordOccurrences(List<WordOccurrence> wordOccurrences) {
+    Collections.sort(wordOccurrences);
     
-// }
+}
 }
 
 
