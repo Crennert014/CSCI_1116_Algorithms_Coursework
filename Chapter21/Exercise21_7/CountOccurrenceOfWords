@@ -17,6 +17,14 @@ public class CountOccurrenceOfWords {
 			if (key.length() > 0) {
 				if (!map.containsKey(key)) {
 					map.put(key, 1);
+					for (String w : words) {
+						if (w.length() > 0) {
+							System.out.println(w.toLowerCase() + "\t" + map.get(w.toLowerCase()));
+						}
+					}
+
+					// System.out.println("Words as Entered of occurrence count: ");
+					// System.out.println(key + "\t" + map.get(key));
 				}
 				else {
 					int value = map.get(key);
@@ -32,13 +40,13 @@ public class CountOccurrenceOfWords {
 			wordOccurrence.add(new WordOccurrence(entry.getKey(), entry.getValue()));
 		}
 
-		// Sort in ascending order of occurrence counts
-		Collections.sort(wordOccurrence);
+		WordOccurrence.sortWordOccurrences(wordOccurrence);
 
 		// Display sorted results (by count ascending)
 		System.out.println("Words in ascending order of occurrence counts:");
 		for (WordOccurrence wo : wordOccurrence) {
 			System.out.println(wo);
+		
 		}
 	}
 }
