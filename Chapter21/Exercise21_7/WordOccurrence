@@ -1,5 +1,8 @@
 
 
+import java.util.Collections;
+import java.util.List;
+
 public class WordOccurrence implements Comparable<WordOccurrence> {
     private String word;
     private int count;
@@ -28,7 +31,8 @@ public class WordOccurrence implements Comparable<WordOccurrence> {
         return word + "\t" + count;
     }
 public static void sortWordOccurrences(List<WordOccurrence> wordOccurrences) {
-    Collections.sort(wordOccurrences);
+     
+    Collections.sort(wordOccurrences, (a, b) -> Integer.compare(b.count, a.count));
     
 }
 }
