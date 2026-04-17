@@ -32,9 +32,7 @@ public class CountOccurrenceOfWords {
 			wordOccurrence.add(new WordOccurrence(entry.getKey(), entry.getValue()));
 		}
 
-
 		// Sort in ascending order of occurrence counts
-		public 
 		Collections.sort(wordOccurrence);
 
 		// Display sorted results (by count ascending)
