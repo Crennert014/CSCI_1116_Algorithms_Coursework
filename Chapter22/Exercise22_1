@@ -1,22 +1,39 @@
 import java.util.Scanner;
 
-public class Exercise22_1 { 
+public class Exercise22_1 {
 
     public static void main(String[] args) {
-
         Scanner input = new Scanner(System.in);
 
-
-        System.out.print(" Enter a string of characters: ");
+        System.out.print("Enter a string: ");
         String s = input.nextLine();
-        int[] count = new int[26];
-        for (int i = 0; i < s.length(); i++) {
-           
-           
-            }
-// I had more but it didnt work like i wanted and so I deleted it. this is what i believe will be the start of the code 
-        }
+
+        System.out.println("The maximum consecutive substring is " + maxSubstring(s));
+    
+    }
+
+   
+    public static String maxSubstring(String s) {
+        if (s == null || s.length() == 0){ return "";}
         
 
+        int maxStart = 0, maxLen = 1;
+        int curStart = 0;
 
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) > s.charAt(i - 1)) {
+                
+                int curLen = i - curStart + 1;
+                if (curLen > maxLen) {
+                    maxLen = curLen;
+                    maxStart = curStart;
+                }
+            } else {
+                
+                curStart = i;
+            }
+        }
+
+        return s.substring(maxStart, maxStart + maxLen);
     }
+}
