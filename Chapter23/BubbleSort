@@ -1,0 +1,19 @@
+public class BubbleSort {
+   /*  Compare neighbors, Swap if out of order, Repeat until no swaps and also Rarely used in real systems */
+    // Bubble Sort implementation
+    public static void bubbleSort(int[] arr) {
+    boolean swapped;
+
+    do {
+        swapped = false;
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                swapped = true;
+            }
+        }
+    } while (swapped);
+}
+}
