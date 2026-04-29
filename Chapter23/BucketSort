@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class BucketSort {
+    
+    // If data is evenly distributed (like 0–100), put items into buckets → sort each bucket → combine.
+// Bucket Sort implementation
+
+    public static void bucketSort(int[] arr) {
+    int max = Arrays.stream(arr).max().getAsInt();
+    int bucketCount = (int) Math.sqrt(arr.length);
+
+    List<List<Integer>> buckets = new ArrayList<>();
+
+    for (int i = 0; i < bucketCount; i++) {
+        buckets.add(new ArrayList<>());
+    }
+
+    for (int num : arr) {
+        int index = (num * bucketCount) / (max + 1);
+        buckets.get(index).add(num);
+    }
+
+    int k = 0;
+    for (List<Integer> bucket : buckets) {
+        Collections.sort(bucket);
+        for (int num : bucket) {
+            arr[k++] = num;
+        }
+    }
+}
+}
