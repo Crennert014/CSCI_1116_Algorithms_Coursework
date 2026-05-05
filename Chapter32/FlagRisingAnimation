@@ -1,0 +1,78 @@
+package Exercise32_03;
+// Note: JavaFX libraries must be added to the project build path
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+public class FlagRisingAnimation extends Application {
+	@Override // Override the start method in the Application class
+	public void start(Stage primaryStage) {
+		// Create a pane
+		Pane pane = new Pane();
+	
+		// Add an image view and add it to pane
+		ImageView imageView = new ImageView("image/us.gif");
+		imageView.setY(200); // Set initial Y position
+		pane.getChildren().add(imageView);
+
+		// Create and start animation thread
+		Thread animationThread = new Thread(new FlagAnimator(imageView));
+		animationThread.setDaemon(true);
+		animationThread.start();
+		
+		// Create a scene and place it in the stage
+		Scene scene = new Scene(pane, 250, 200); 
+		primaryStage.setTitle("FlagRisingAnimation"); // Set the stage title
+		primaryStage.setScene(scene); // Place the scene in the stage
+		primaryStage.show(); // Display the stage
+	}
+	
+	// Inner class to handle flag animation using a thread
+	private static class FlagAnimator implements Runnable {
+		private ImageView imageView;
+		private static final int START_Y = 200;
+		private static final int END_Y = 0;
+		private static final int STEP = 5;
+		private static final int SLEEP_TIME = 50;
+		private static final int CYCLES = 5;
+		
+		public FlagAnimator(ImageView imageView) {
+			this.imageView = imageView;
+		}
+		
+		@Override
+		public void run() {
+			// Animate the flag rising and falling for multiple cycles
+			for (int cycle = 0; cycle < CYCLES; cycle++) {
+				// Move flag up from bottom to top
+				for (int y = START_Y; y >= END_Y; y -= STEP) {
+					final int currentY = y;
+					Platform.runLater(() -> imageView.setY(currentY));
+					try {
+						Thread.sleep(SLEEP_TIME); // Control animation speed
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				// Move flag down back to starting position
+				for (int y = END_Y; y <= START_Y; y += STEP) {
+					final int currentY = y;
+					Platform.runLater(() -> imageView.setY(currentY));
+					try {
+						Thread.sleep(SLEEP_TIME);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
+}
