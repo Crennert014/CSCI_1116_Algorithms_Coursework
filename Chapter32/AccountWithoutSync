@@ -37,7 +37,7 @@ public class AccountWithoutSync {
                 Thread.sleep(5);
             } catch (InterruptedException ex) {
             }
-            balance = newBalance;
+            balance = balance + amount;
         }
     }
 }
