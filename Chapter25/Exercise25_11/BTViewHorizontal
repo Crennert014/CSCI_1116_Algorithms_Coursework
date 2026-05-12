@@ -1,0 +1,64 @@
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
+
+public class BTViewHorizontal extends Pane {
+
+    private BST<Integer> tree = new BST<>();
+    private double radius = 15; // Tree node radius
+    private double hGap = 50;   // Horizontal gap between levels
+
+    BTViewHorizontal(BST<Integer> tree) {
+        this.tree = tree;
+        setStatus("Tree is empty");
+    }
+
+    public void setStatus(String msg) {
+        getChildren().add(new Text(20, 20, msg));
+    }
+
+    public void displayTree() {
+        this.getChildren().clear(); // Clear the pane
+        if (tree.getRoot() != null) {
+            // Root starts at the left edge, centered vertically
+            // vGap controls the vertical spread and halves each level
+            displayTree(tree.getRoot(), hGap, getHeight() / 2, getHeight() / 4);
+        }
+    }
+
+    /**
+     * Display a subtree rooted at position (x, y) horizontally.
+     * The tree grows to the right; left child goes up, right child goes down.
+     *
+     * @param root  the current node
+     * @param x     horizontal position of this node
+     * @param y     vertical position of this node
+     * @param vGap  vertical gap to the next level's children
+     */
+    private void displayTree(BST.TreeNode<Integer> root,
+            double x, double y, double vGap) {
+
+        if (root.left != null) {
+            // Draw a line to the left child (upper-right)
+            getChildren().add(new Line(x, y, x + hGap, y - vGap));
+            // Recurse into the left subtree
+            displayTree(root.left, x + hGap, y - vGap, vGap / 2);
+        }
+
+        if (root.right != null) {
+            // Draw a line to the right child (lower-right)
+            getChildren().add(new Line(x, y, x + hGap, y + vGap));
+            // Recurse into the right subtree
+            displayTree(root.right, x + hGap, y + vGap, vGap / 2);
+        }
+
+        // Display the node circle and label
+        Circle circle = new Circle(x, y, radius);
+        circle.setFill(Color.WHITE);
+        circle.setStroke(Color.BLACK);
+        getChildren().addAll(circle,
+                new Text(x - 4, y + 4, root.element + ""));
+    }
+}
