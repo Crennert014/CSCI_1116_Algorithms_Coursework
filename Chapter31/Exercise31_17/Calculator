@@ -1,0 +1,105 @@
+import javafx.application.Application;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+public class App extends Application {
+
+    private TextField tfInvestmentAmount = new TextField();
+    private TextField tfAnnualInterestRate = new TextField();
+    private TextField tfYears = new TextField();
+    private TextField tfFutureValue = new TextField();
+
+    @Override
+    public void start(Stage primaryStage) {
+        // Menu bar
+        MenuBar menuBar = new MenuBar();
+        Menu menuOperation = new Menu("Operation");
+        MenuItem miCalculate = new MenuItem("Calculate");
+        MenuItem miExit = new MenuItem("Exit");
+        menuOperation.getItems().addAll(miCalculate, new SeparatorMenuItem(), miExit);
+        menuBar.getMenus().add(menuOperation);
+
+        // Input grid
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(15, 20, 15, 20));
+        grid.setHgap(12);
+        grid.setVgap(10);
+        grid.setAlignment(Pos.CENTER);
+
+        grid.add(new Label("Investment Amount ($):"), 0, 0);
+        grid.add(tfInvestmentAmount, 1, 0);
+
+        grid.add(new Label("Annual Interest Rate (%):"), 0, 1);
+        grid.add(tfAnnualInterestRate, 1, 1);
+
+        grid.add(new Label("Number of Years:"), 0, 2);
+        grid.add(tfYears, 1, 2);
+
+        grid.add(new Label("Future Value ($):"), 0, 3);
+        tfFutureValue.setEditable(false);
+        tfFutureValue.getStyleClass().add("result-field");
+        grid.add(tfFutureValue, 1, 3);
+
+        Button btCalculate = new Button("Calculate");
+        btCalculate.getStyleClass().add("calc-button");
+        GridPane.setHalignment(btCalculate, HPos.RIGHT);
+        grid.add(btCalculate, 1, 4);
+
+        // Event handlers
+        btCalculate.setOnAction(e -> calculate());
+        miCalculate.setOnAction(e -> calculate());
+        miExit.setOnAction(e -> primaryStage.close());
+
+        BorderPane root = new BorderPane();
+        root.setTop(menuBar);
+        root.setCenter(grid);
+
+        Scene scene = new Scene(root, 400, 250);
+        scene.getStylesheets().add(
+            getClass().getResource("myStyle.css").toExternalForm());
+
+        primaryStage.setTitle("Investment Value Calculator");
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+
+    private void calculate() {
+        try {
+            double investmentAmount = Double.parseDouble(
+                tfInvestmentAmount.getText().trim());
+            double annualRate = Double.parseDouble(
+                tfAnnualInterestRate.getText().trim()) / 100.0;
+            int years = Integer.parseInt(tfYears.getText().trim());
+
+            if (investmentAmount < 0 || annualRate < 0 || years < 0) {
+                showAlert("Input values must be non-negative.");
+                return;
+            }
+
+            double monthlyRate = annualRate / 12.0;
+            double futureValue = investmentAmount
+                * Math.pow(1 + monthlyRate, years * 12);
+
+            tfFutureValue.setText(String.format("%,.2f", futureValue));
+        } catch (NumberFormatException ex) {
+            showAlert("Please enter valid numeric values.");
+        }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message,
+            ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
