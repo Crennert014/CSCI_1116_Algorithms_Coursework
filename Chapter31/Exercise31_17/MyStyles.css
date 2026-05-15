@@ -1,0 +1,39 @@
+.root {
+    -fx-font-size: 13px;
+    -fx-background-color: #f4f4f4;
+}
+
+.label {
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-pref-width: 180px;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-border-color: #aaa;
+    -fx-border-width: 1;
+    -fx-padding: 4 6 4 6;
+}
+
+.result-field {
+    -fx-background-color: #e8f5e9;
+    -fx-border-color: #66bb6a;
+    -fx-font-weight: bold;
+}
+
+.calc-button {
+    -fx-background-color: #1976d2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 6 16 6 16;
+}
+
+.calc-button:hover {
+    -fx-background-color: #1565c0;
+}
+
+.menu-bar {
+    -fx-background-color: #e0e0e0;
+}
