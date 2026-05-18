@@ -1,0 +1,99 @@
+import javafx.application.Application;
+  2  import javafx.geometry.Pos;
+  3  import javafx.scene.Scene;
+  4  import javafx.scene.control.Button;
+  5  import javafx.scene.control.Label;
+  6  import javafx.scene.control.Menu;
+  7  import javafx.scene.control.MenuBar;
+  8  import javafx.scene.control.MenuItem;
+  9  import javafx.scene.control.TextField;
+ 10  import javafx.scene.input.KeyCombination;
+ 11  import javafx.scene.layout.HBox;
+ 12  import javafx.scene.layout.VBox;
+ 13  import javafx.stage.Stage;
+ 14
+ 15  public class MenuDemo extends Application {
+ 16    private TextField tfNumber1 = new TextField();
+ 17    private TextField tfNumber2 = new TextField();
+ 18    private TextField tfResult = new TextField();
+ 19
+ 20    @Override // Override the start method in the Application class
+ 21    public void start(Stage primaryStage) {
+ 22      MenuBar menuBar = new MenuBar();
+ 23
+ 24      Menu menuOperation = new Menu("Operation");
+ 25      Menu menuExit = new Menu("Exit");
+ 26      menuBar.getMenus().addAll(menuOperation, menuExit);
+ 27
+ 28      MenuItem menuItemAdd = new MenuItem("Add");
+ 29      MenuItem menuItemSubtract = new MenuItem("Subtract");
+ 30      MenuItem menuItemMultiply = new MenuItem("Multiply");
+ 31      MenuItem menuItemDivide = new MenuItem("Divide");
+ 32      menuOperation.getItems().addAll(menuItemAdd, menuItemSubtract,
+ 33        menuItemMultiply, menuItemDivide);
+ 34
+ 35      MenuItem menuItemClose = new MenuItem("Close"); 
+ 36      menuExit.getItems().add(menuItemClose);
+ 37
+ 38      menuItemAdd.setAccelerator(
+ 39        KeyCombination.keyCombination("Ctrl+A")); 
+ 40      menuItemSubtract.setAccelerator(
+ 41        KeyCombination.keyCombination("Ctrl+S")); 
+ 42      menuItemMultiply.setAccelerator(
+ 43        KeyCombination.keyCombination("Ctrl+M"));
+ 44      menuItemDivide.setAccelerator(
+ 45        KeyCombination.keyCombination("Ctrl+D"));
+ 46
+ 47      HBox hBox1 = new HBox(5);
+ 48      tfNumber1.setPrefColumnCount(2);
+ 49      tfNumber2.setPrefColumnCount(2);
+ 50      tfResult.setPrefColumnCount(2);
+ 51      hBox1.getChildren().addAll(new Label("Number 1:"), tfNumber1,
+ 52        new Label("Number 2:"), tfNumber2, new Label("Result:"),
+ 53        tfResult);
+ 54      hBox1.setAlignment(Pos.CENTER);
+ 55
+ 56      HBox hBox2 = new HBox(5);
+ 57      Button btAdd = new Button("Add");
+ 58      Button btSubtract = new Button("Subtract");
+ 59      Button btMultiply = new Button("Multiply");
+ 60      Button btDivide = new Button("Divide");
+ 61       hBox2.getChildren().addAll(btAdd, btSubtract, btMultiply, btDivide);
+ 62      hBox2.setAlignment(Pos.CENTER);
+ 63
+ 64      VBox vBox = new VBox(10);
+ 65      vBox.getChildren().addAll(menuBar, hBox1, hBox2);
+ 66      Scene scene = new Scene(vBox, 300, 250);
+ 67      primaryStage.setTitle("MenuDemo"); // Set the window title
+ 68      primaryStage.setScene(scene); // Place the scene in the window
+ 69      primaryStage.show(); // Display the window
+ 70
+ 71       // Handle menu actions 
+ 72       menuItemAdd.setOnAction(e -> perform('+'));
+ 73       menuItemSubtract.setOnAction(e -> perform('−'));
+ 74       menuItemMultiply.setOnAction(e -> perform('*'));
+ 75       menuItemDivide.setOnAction(e -> perform('/'));
+ 76       menuItemClose.setOnAction(e -> System.exit(0));
+ 77
+ 78       // Handle button actions 
+ 79       btAdd.setOnAction(e -> perform('+'));
+ 80       btSubtract.setOnAction(e -> perform('−')); 
+ 81       btMultiply.setOnAction(e -> perform('*'));
+ 82       btDivide.setOnAction(e -> perform('/'));
+ 83     }
+ 84
+ 85     private void perform(char operator) { 
+ 86       double number1 = Double.parseDouble(tfNumber1.getText());
+ 87       double number2 = Double.parseDouble(tfNumber2.getText());
+ 88
+ 89       double result = 0;
+ 90       switch (operator) {
+ 91         case '+': result = number1 + number2; break;
+ 92         case '−': result = number1 − number2; break;
+ 93         case '*': result = number1 * number2; break;
+ 94         case '/': result = number1 / number2; break;
+ 95      }
+ 96
+ 97      tfResult.setText(result + "");
+ 98    }
+100  }
